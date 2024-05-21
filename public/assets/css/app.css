@@ -1,0 +1,61 @@
+.blue-bg-somus {
+    background-color: #0f406a;
+}
+
+.blue-text-somus {
+    color: #0f406a;
+}
+
+.orange-bg-somus {
+    background-color: #f58220;
+}
+
+.orange-text-somus {
+    color: #f58220;
+}
+
+.orange-border-somus {
+    border-color: #f58220;
+}
+
+.black-bg-somus {
+    background-color: #231f20;
+}
+
+.black-text-somus {
+    color: #231f20;
+}
+
+.gray-bg-somus {
+    background-color: #58595b;
+}
+
+.gray-text-somus {
+    color: #58595b;
+}
+
+.primary-section {
+    background-image: url("/assets/images/cena1.jpg");
+    width: 100%;
+    min-height: 90vh;
+    position: relative;
+    padding: 120px 0 60px 0;
+    display: flex;
+    align-items: center;
+}
+
+.map-section {
+    width: 100%;
+    min-height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.guests-section {
+    background-color: #efefef !important;
+}
+
+#mainMessage {
+    min-height: 30vh;
+}

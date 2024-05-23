@@ -35,7 +35,7 @@
 }
 
 .primary-section {
-    background-image: url("/assets/images/cena1.jpg");
+    background-image: url("/SomusEventos/public/assets/images/cena1.jpg");
     width: 100%;
     min-height: 90vh;
     position: relative;

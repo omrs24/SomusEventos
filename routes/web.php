@@ -20,14 +20,14 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/registro'], function () {
 
-    Route::get('/', [FormController::class, 'index']);
+    Route::get('/', [FormController::class, 'index'])->name("registro");
     //obtener la info del recurso solicitado
     Route::get('/{resource}', [FormController::class, 'index']);
     //Debe retornar una vista
     Route::get('/create', [FormController::class, 'create']);
     Route::get('/{resource}/edit', [FormController::class, 'edit']);
 
-    Route::post('/', [FormController::class, 'store']);
-    Route::put('/resourceName/{resource}', [FormController::class, 'update']);
-    Route::delete('/resourceName/{resource}', [FormController::class, 'delete']);
+    Route::post('/', [FormController::class, 'store'])->name("saveData");
+    Route::put('/{resource}', [FormController::class, 'update']);
+    Route::delete('/{resource}', [FormController::class, 'delete']);
 });

@@ -1,5 +1,5 @@
 <header>
-    <div id="header" class="header d-flex align-items-center fixed-top">
+    <div id="header" class="header d-flex align-items-center fixed-top bg-dark" style="--bs-bg-opacity: .2;">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
             <a class="logo d-flex align-items-center" href="#">
                 <img src="{{ asset('/assets/images/somus-logo-dark.png') }}" alt="Somus" width="100" height="80">

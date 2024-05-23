@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="col-md-5 align-self-center d-flex justify-content-center">
-                        <a href="" class="btn btn-outline-light rounded-4 fs-5 text-bold align-items-center">
+                        <a href="{{ route('registro') }}" class="btn btn-outline-light rounded-4 fs-5 text-bold align-items-center">
                             Registrate aqui
                             <i class="bi bi-arrow-right my-auto"></i>
                         </a>

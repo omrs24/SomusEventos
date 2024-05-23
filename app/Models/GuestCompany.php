@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Form extends Model
+class GuestCompany extends Model
 {
     use HasFactory;
 
@@ -16,9 +16,6 @@ class Form extends Model
      */
     protected $fillable = [
         'name',
-        'lastName',
-        'email',
-        'phone',
     ];
 
 
@@ -31,6 +28,4 @@ class Form extends Model
     //     'password',
     //     'remember_token',
     // ];
-
-
 }

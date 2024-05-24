@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone');
-            $table->string('guest_companies_id');
+            $table->foreignId('guest_companies_id')->nullable(true);
             $table->integer('rol_id');
             $table->integer('sent_mail');
             $table->boolean('answered_form')->nullable(true);

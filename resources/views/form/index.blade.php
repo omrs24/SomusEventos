@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-sm-6 py-2">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="txtTeléfono" placeholder="Teléfono">
+                            <input type="text" class="form-control" id="txtTelefono" placeholder="Teléfono">
                             <label for="txtTelefono" class="form-label"><i class="bi bi-phone"></i> Teléfono</label>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             <select id="ddlEmpresa" class="form-control" aria-label="Empresa">
                                 <option value="-1" disabled>Selecciona...</option>
                             </select>
-                            <label for="ddlEmpresa" class="form-label">Empresa</label>
+                            <label for="ddlEmpresa" class="form-label"><i class="bi bi-building"></i> Empresa</label>
                         </div>
                     </div>
 
@@ -72,19 +72,22 @@
     @include('shared.footer')
 
     <script>
-        function sendForm() {
+        async function sendForm() {
 
             let data = {
                 "_token": "{{ csrf_token() }}",
-                "nombre": "omar"
+                "name": document.getElementById("txtNombre").value,
+                "lastName": document.getElementById("txtApellidos").value,
+                "email": document.getElementById("txtCorreo").value,
+                "phone": document.getElementById("txtTelefono").value,
             }
 
             let fetchData = {
                 method: 'POST',
-                body: JSON.stringify(data),
                 headers: new Headers({
                     'Content-Type': 'application/json; charset=UTF-8'
-                })
+                }),
+                body: JSON.stringify(data),
             }
 
             fetch("{{ route('saveData') }}", fetchData)

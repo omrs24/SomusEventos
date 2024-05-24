@@ -16,9 +16,10 @@ class Form extends Model
      */
     protected $fillable = [
         'name',
-        'lastName',
+        'last_name',
         'email',
         'phone',
+        'guest_companies_id',
     ];
 
 

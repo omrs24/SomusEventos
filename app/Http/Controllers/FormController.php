@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Form;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class FormController extends Controller
 {
@@ -30,10 +31,28 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            //Get Json data into seriallized array
+            $data = json_decode($request->getContent());
 
-        // Guardar Registro
+            $form = new Form();
 
-        return response()->json([$request], 201);
+            $form->name = $data->name;
+            $form->last_name = $data->lastName;
+            $form->email = $data->email;
+            $form->phone = $data->phone;
+            $form->guest_companies_id = $data->guest_companies_id;
+
+            $form->save();
+
+            return response()->json([
+                "data" => $form->id
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "errorMsg" => json_encode($th)
+            ], 500);
+        }
     }
 
     /**

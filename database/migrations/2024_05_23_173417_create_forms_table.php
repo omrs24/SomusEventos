@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("lastName");
+            $table->string("last_name");
             $table->string("email")->unique();
             $table->string("phone")->nullable(true);
             $table->foreignId("guest_companies_id");

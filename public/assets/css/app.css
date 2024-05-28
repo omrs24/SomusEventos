@@ -1,3 +1,8 @@
+html,
+body {
+    height: 100%;
+}
+
 .blue-bg-somus {
     background-color: #0f406a;
 }

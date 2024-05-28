@@ -7,9 +7,9 @@
 
     @include('shared.header')
 
-    <main class="main mt-5">
+    <main class="main d-flex flex-column h-100 justify-content-between pt-5">
 
-        <section class="section form p-5">
+        <section class="section form px-5 py-5">
 
             <div class="container">
 
@@ -67,9 +67,9 @@
             </div>
 
         </section>
-    </main>
 
-    @include('shared.footer')
+        @include('shared.footer')
+    </main>
 
     <script>
         async function sendForm() {

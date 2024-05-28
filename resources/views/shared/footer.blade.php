@@ -1,10 +1,10 @@
-<footer id="footer" class="footer d-flex flex-column align-self-end gray-bg-somus">
+<footer id="footer" class="footer bg-dark bg-gradient w-100">
 
-    <div class="container footer-top text-light">
-        <div class="row gy-4">
+    <div class="container footer-top text-light pt-3">
+        <div class="row gy-4 justify-content-center text-center">
             <div class="col-lg-4 col-md-6 footer-about">
-                <a href="index.html" class="d-flex align-items-center text-reset">
-                    <span class="sitename">Som.us</span>
+                <a href="index.html" class="text-reset">
+                    <img src="{{ asset('/assets/images/somus_logo-bco.png') }}" alt="" srcset="">
                 </a>
                 <div class="footer-contact pt-3">
                     <p>Panzacola 62, Santa Catarina</p>

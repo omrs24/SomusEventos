@@ -15,9 +15,9 @@
                     <div class="col-md-5">
                         <div id="mainMessage" class="container d-flex align-items-center">
                             <div class="row">
-                                <h3 class="text-light fw-bold">Comida reaseguradores 2024</h3>
+                                <h2 class="text-light fw-bold">Comida reaseguradores 2024</h2>
                                 <span>
-                                    <p class="fs-5 fw-bold orange-text-somus">
+                                    <p class="fs-4 fw-bold orange-text-somus">
                                         Te invitamos a asistir en la proxima Comida de Reaseguradores
                                     </p>
                                 </span>
@@ -39,7 +39,7 @@
 
         <section class="section guests-section d-none d-lg-block">
             <div class="container">
-                <div class="row">
+                <div class="row py-5">
                     <div class="col-sm-12 d-flex">
                         <div class="item">
                             <img src="{{ asset('/assets/images/invitados/tbs-100.jpg') }}" class="d-block" width="200" alt="...">

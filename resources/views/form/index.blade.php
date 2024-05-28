@@ -7,63 +7,83 @@
 
     @include('shared.header')
 
-    <main class="main d-flex flex-column h-100 justify-content-between pt-5">
+    <main class="main d-flex flex-column h-100 justify-content-between pt-5 bg-dark" style="--bs-bg-opacity: .1;">
 
-        <section class="section form px-5 py-5">
+        <section class="section form px-5 py-5 ">
 
-            <div class="container">
+            <div class="container py-5">
 
-                <div class="row">
-                    <div class="col-12">
-                        <span> Ingresa los datos a continuacion para registrarte al evento.</span>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="d-none d-lg-block col-lg-4">
+                            <img src="{{ asset('/assets/images/cena2.jpg') }}" class="img-fluid rounded-start h-100" alt="...">
+                        </div>
+                        <div class="d-md-block d-lg-none col-lg-4">
+                            <img src="{{ asset('/assets/images/cena2.jpg') }}" class="img-fluid rounded-top h-100" alt="...">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card-body py-3">
+                                <div class="row mx-4 mt-2">
+                                    <div class="col-12">
+                                        <span> Ingresa los datos a continuacion para registrarte al evento.</span>
+                                    </div>
+                                </div>
+                                @csrf <!-- {{ csrf_field() }} -->
+                                <div class="row g-2 m-4">
+
+                                    <div class="col-12 py-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre">
+                                            <label for="txtNombre" class="form-label"> <i class="bi bi-person"></i> Nombre</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 py-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="txtApellidos" placeholder="Apellido(s)">
+                                            <label for="txtApellidos" class="form-label"><i class="bi bi-person"></i> Apellido(s)</label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 py-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="txtCorreo" placeholder="Correo">
+                                            <label for="txtCorreo" class="form-label"><i class="bi bi-at"></i> Correo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 py-2">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="txtTelefono" placeholder="Teléfono">
+                                            <label for="txtTelefono" class="form-label"><i class="bi bi-phone"></i> Teléfono</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 py-2">
+                                        <div class="form-floating">
+                                            <select id="ddlEmpresa" class="form-control" aria-label="Empresa">
+                                                <option value="-1" disabled>Selecciona...</option>
+                                            </select>
+                                            <label for="ddlEmpresa" class="form-label text-reset"><i class="bi bi-building"></i> Empresa</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="d-grid gap-2 col-sm-4 ms-auto orange-text-somus">
+                                        <button type="button" class="btn orange-bg-somus" onclick="sendForm();">¡Registrarse!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                @csrf <!-- {{ csrf_field() }} -->
-                <div class="row g-3 my-3">
 
-                    <div class="col-sm-6 py-2">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre">
-                            <label for="txtNombre" class="form-label"> <i class="bi bi-person"></i> Nombre</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 py-2">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="txtApellidos" placeholder="Apellido(s)">
-                            <label for="txtApellidos" class="form-label"><i class="bi bi-person"></i> Apellido(s)</label>
+                <div class="row justify-content-center">
+                    <div class="col-8">
 
-                        </div>
                     </div>
-
-                    <div class="col-sm-6 py-2">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="txtCorreo" placeholder="Correo">
-                            <label for="txtCorreo" class="form-label"><i class="bi bi-at"></i> Correo</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 py-2">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="txtTelefono" placeholder="Teléfono">
-                            <label for="txtTelefono" class="form-label"><i class="bi bi-phone"></i> Teléfono</label>
-                        </div>
-                    </div>
-                    <div class="col-6"></div>
-                    <div class="col-sm-6 py-2">
-                        <div class="form-floating">
-                            <select id="ddlEmpresa" class="form-control" aria-label="Empresa">
-                                <option value="-1" disabled>Selecciona...</option>
-                            </select>
-                            <label for="ddlEmpresa" class="form-label"><i class="bi bi-building"></i> Empresa</label>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="row">
-                    <div class="d-grid gap-2 col-sm-3 ms-auto orange-text-somus">
-                        <button type="button" class="btn orange-bg-somus" onclick="sendForm();">¡Registrarse!</button>
-                    </div>
-                </div>
             </div>
 
         </section>

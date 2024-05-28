@@ -57,9 +57,9 @@ body {
     align-items: center;
 }
 
-.guests-section {
+/*.guests-section {
     background-color: #efefef !important;
-}
+}*/
 
 #mainMessage {
     min-height: 30vh;

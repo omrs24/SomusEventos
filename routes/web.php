@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\GuestCompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,19 @@ Route::group(['prefix' => '/registro'], function () {
     Route::post('/', [FormController::class, 'store'])->name("saveData");
     Route::put('/{resource}', [FormController::class, 'update']);
     Route::delete('/{resource}', [FormController::class, 'delete']);
+});
+
+
+Route::group(['prefix' => '/empresas'], function () {
+
+    Route::get('/', [GuestCompanyController::class, 'index'])->name("getGuestCompanies");
+    //obtener la info del recurso solicitado
+    Route::get('/{resource}', [GuestCompanyController::class, 'index']);
+    //Debe retornar una vista
+    Route::get('/create', [GuestCompanyController::class, 'create']);
+    Route::get('/{resource}/edit', [GuestCompanyController::class, 'edit']);
+
+    Route::post('/', [GuestCompanyController::class, 'store']);
+    Route::put('/{resource}', [GuestCompanyController::class, 'update']);
+    Route::delete('/{resource}', [GuestCompanyController::class, 'delete']);
 });

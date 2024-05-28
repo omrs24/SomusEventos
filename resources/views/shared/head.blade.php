@@ -6,4 +6,5 @@
     <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/icons/font/bootstrap-icons.min.css') }}">
+    <script src="{{ asset('/assets/js/validate.min.js') }}"></script>
 </head>

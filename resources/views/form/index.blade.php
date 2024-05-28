@@ -92,6 +92,8 @@
     </main>
 
     <script>
+        getGuestCompanies()
+
         async function sendForm() {
 
             let data = {
@@ -100,7 +102,11 @@
                 "lastName": document.getElementById("txtApellidos").value,
                 "email": document.getElementById("txtCorreo").value,
                 "phone": document.getElementById("txtTelefono").value,
+                "guest_companies_id": document.getElementById("ddlEmpresa").value,
             }
+
+            if (!validateForm(data))
+                return
 
             let fetchData = {
                 method: 'POST',
@@ -116,6 +122,98 @@
                 }).catch((error) => {
                     console.log(`error ${error}`)
                 })
+        }
+
+        async function getGuestCompanies() {
+            let fetchData = {
+                method: 'GET',
+                headers: new Headers({
+                    'Content-Type': 'application/json; charset=UTF-8'
+                })
+            }
+
+            fetch("{{ route('getGuestCompanies') }}", fetchData)
+                .then(response => response.json())
+                .then(data => {
+                    data.guestCompanies.map((company) => {
+                        var ddlEmpresas = document.getElementById("ddlEmpresa")
+                        var option = document.createElement("option");
+                        option.text = company.company_name;
+                        option.value = company.id;
+
+                        ddlEmpresas.appendChild(option)
+
+                        //ddlEmpresas.appendChild(`<option value='${company.id}'> ${company.company_name} </option>`)
+                    })
+                })
+
+        }
+
+        function validateForm(data) {
+
+            var constraints = {
+                from: {
+                    presence: {
+                        allowEmpty: false,
+                        message: "^Correo requerido."
+                    },
+                    email: {
+                        message: "^Formato de correo incorrecto."
+                    },
+                },
+                name: {
+                    presence: {
+                        allowEmpty: false,
+                        message: "^Nombre requerido.",
+                    },
+                },
+                lastName: {
+                    presence: {
+                        allowEmpty: false,
+                        message: "^Apellido requerido.",
+                    },
+                },
+                phone: {
+                    presence: {
+                        allowEmpty: false,
+                        message: "^Telefono requerido."
+                    },
+                    numericality: {
+                        onlyInteger: true,
+                        greaterThan: 0,
+                        message: "^Ingrese solo numeros."
+                    },
+
+                }
+            }
+
+            var result = validate({
+                from: data.email,
+                name: data.name,
+                lastName: data.lastName,
+                phone: data.phone
+            }, constraints)
+
+            const objectMap = (obj, fn) =>
+                Object.fromEntries(
+                    Object.entries(obj).map(
+                        ([k, v], i) => [k, fn(v, k, i)]
+                    )
+                )
+            var message
+            objectMap(result, errors => {
+                message = message + `${errors[0]} \n`
+            })
+
+            alert(message)
+            /*if (result) {
+                // enviar mensaje con cada uno de los errores
+                result.map((input, key) => {
+                    console.log(input + " " + key)
+                })
+
+                return false
+            }*/
         }
     </script>
 

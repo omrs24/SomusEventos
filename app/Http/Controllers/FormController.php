@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use Barryvdh\Debugbar\Facades\Debugbar;
+use Exception;
 
 class FormController extends Controller
 {
@@ -48,9 +49,9 @@ class FormController extends Controller
             return response()->json([
                 "data" => $form->id
             ], 201);
-        } catch (\Throwable $th) {
+        } catch (Exception $e) {
             return response()->json([
-                "errorMsg" => json_encode($th)
+                "errorMsg" => json_encode($e)
             ], 500);
         }
     }

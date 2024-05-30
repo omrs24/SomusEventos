@@ -51,17 +51,21 @@ class FormController extends Controller
             ], 201);
         } catch (Exception $e) {
 
-            if ((int)$e["errorInfo"][1] == 1062) {
+            if ((int)$e->getCode() == 23000) {
                 return response()->json([
-                    "errorMsg" => "El correo ya se encuentra registrado."
-                ], 500);
+                    "errorMsg" => [
+                        "errorInfo" => "El correo ya se encuentra registrado."
+                    ]
+                ], 400);
             }
 
             Debugbar::info($e->getMessage());
             Debugbar::log($e->getMessage());
 
             return response()->json([
-                "errorMsg" => $e
+                "errorMsg" => [
+                    "errorInfo" => "Unexpected error. Contact system admin sistemas@som.us"
+                ]
             ], 500);
         }
     }

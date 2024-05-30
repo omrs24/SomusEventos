@@ -28,9 +28,16 @@
                                         <span> Ingresa los datos a continuacion para registrarte al evento.</span>
                                     </div>
                                 </div>
-                                <div id="error-container" class="error-container d-none">
-                                    <div class="bg-danger-subtle border rounded border-danger text-danger">
-                                        <p id="error-message" class="error-message p-2"> </p>
+                                <div id="error-container" class="error-container animate__animated d-none">
+                                    <div class="bg-danger-subtle border rounded border-danger text-danger p-4 my-auto">
+
+                                        <span id="error-message" class="error-message"> </span>
+                                    </div>
+                                </div>
+                                <div id="success-container" class="success-container animate__animated d-none">
+                                    <div class="bg-success-subtle border rounded border-success text-success p-4 my-auto">
+                                        <i class="bi bi-check-circle"></i>
+                                        <span id="success-message" class="success-message"> </span>
                                     </div>
                                 </div>
                                 @csrf <!-- {{ csrf_field() }} -->
@@ -74,7 +81,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="d-grid gap-2 col-sm-4 ms-auto orange-text-somus">
+                                    <div class="d-grid gap-2 col-sm-4 ms-auto orange-text-somus me-4">
                                         <button type="button" class="btn orange-bg-somus" onclick="sendForm();">¡Registrarse!</button>
                                     </div>
                                 </div>
@@ -127,25 +134,13 @@
 
                     if (!response.ok) {
                         response.json().then(data => {
-                            var errorContainer = document.getElementById("error-container")
-                            var errorMessage = document.getElementById("error-message")
-
-                            errorContainer.classList.add("d-none")
-                            errorMessage.innerHTML = ""
-                            window.clearTimeout(timeout)
-
-                            errorContainer.classList.remove("d-none")
-                            console.log(data.errorMsg);
-                            errorMessage.append(data.errorMsg.errorInfo)
-
-                            timeout = window.setTimeout(() => {
-                                errorContainer.classList.add("d-none")
-                            }, 5500);
+                            var message = `<i class="bi bi-x-circle"></i> ${data.errorMsg.errorInfo} `
+                            showErrorMessage(message)
                         })
+                        return false
                     }
 
-
-
+                    showSuccessMessage("Registrado Correctamente")
 
                 }).catch(error => {
                     console.log(error);
@@ -182,9 +177,6 @@
 
         function validateForm(data) {
 
-            var errorContainer = document.getElementById("error-container")
-            var errorMessage = document.getElementById("error-message")
-
             var constraints = {
                 name: {
                     presence: {
@@ -220,9 +212,6 @@
 
                 }
             }
-            errorContainer.classList.add("d-none")
-            errorMessage.innerHTML = ""
-            window.clearTimeout(timeout)
 
             var result = validate({
                 from: data.email,
@@ -240,21 +229,57 @@
                         )
                     )
 
+                var message = "";
                 objectMap(result, errors => {
-                    var message = `${String(errors[0])} \n`
-
-                    errorContainer.classList.remove("d-none")
-                    errorMessage.append(message)
+                    if (errors[0])
+                        message = message + `<i class="bi bi-x-circle"></i> ${String(errors[0])} <br>`
                 })
 
-                timeout = window.setTimeout(() => {
-                    errorContainer.classList.add("d-none")
-                }, 5500);
-
+                showErrorMessage(message)
 
                 return false
             }
             return true
+        }
+
+        function showErrorMessage(message) {
+            var errorContainer = document.getElementById("error-container")
+            var errorMessage = document.getElementById("error-message")
+
+            // se puede simplificar esto
+            errorContainer.classList.add("d-none")
+            errorMessage.innerHTML = ""
+            window.clearTimeout(timeout)
+
+            errorContainer.classList.remove("d-none")
+            errorContainer.classList.remove("animate__fadeOutRight")
+            errorContainer.classList.add("animate__fadeInRight")
+            errorMessage.innerHTML = message
+
+            timeout = window.setTimeout(() => {
+                errorContainer.classList.remove("animate__fadeInRight")
+                errorContainer.classList.add("animate__fadeOutRight")
+            }, 5500);
+        }
+
+        function showSuccessMessage(message) {
+            var successContainer = document.getElementById("success-container")
+            var successMessage = document.getElementById("success-message")
+
+            // se puede simplificar esto
+            successContainer.classList.add("d-none")
+            successMessage.innerHTML = ""
+            window.clearTimeout(timeout)
+
+            successContainer.classList.remove("d-none")
+            successContainer.classList.remove("animate__fadeOutRight")
+            successContainer.classList.add("animate__fadeInRight")
+            successMessage.innerHTML = message
+
+            timeout = window.setTimeout(() => {
+                successContainer.classList.remove("animate__fadeInRight")
+                successContainer.classList.add("animate__fadeOutRight")
+            }, 5500);
         }
     </script>
 

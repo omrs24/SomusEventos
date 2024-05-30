@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/icons/font/bootstrap-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/toastr/build/toastr.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/animate/animate.min.css') }}">
 
     <script type="text/javascript" src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/assets/sweetalert2/package/dist/sweetalert2.all.min.js') }}"></script>

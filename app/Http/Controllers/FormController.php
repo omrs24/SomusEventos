@@ -50,8 +50,18 @@ class FormController extends Controller
                 "data" => $form->id
             ], 201);
         } catch (Exception $e) {
+
+            if ((int)$e["errorInfo"][1] == 1062) {
+                return response()->json([
+                    "errorMsg" => "El correo ya se encuentra registrado."
+                ], 500);
+            }
+
+            Debugbar::info($e->getMessage());
+            Debugbar::log($e->getMessage());
+
             return response()->json([
-                "errorMsg" => json_encode($e)
+                "errorMsg" => $e
             ], 500);
         }
     }

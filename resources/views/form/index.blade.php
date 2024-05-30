@@ -28,6 +28,11 @@
                                         <span> Ingresa los datos a continuacion para registrarte al evento.</span>
                                     </div>
                                 </div>
+                                <div id="error-container" class="error-container d-none">
+                                    <div class="bg-danger-subtle border rounded border-danger text-danger">
+                                        <p id="error-message" class="error-message p-2"> </p>
+                                    </div>
+                                </div>
                                 @csrf <!-- {{ csrf_field() }} -->
                                 <div class="row g-2 m-4">
 
@@ -93,6 +98,7 @@
 
     <script>
         getGuestCompanies()
+        var timeout
 
         async function sendForm() {
 
@@ -118,10 +124,35 @@
 
             fetch("{{ route('saveData') }}", fetchData)
                 .then((response) => {
-                    console.log(response)
-                }).catch((error) => {
-                    console.log(`error ${error}`)
+
+                    if (!response.ok) {
+                        response.json().then(data => {
+                            var errorContainer = document.getElementById("error-container")
+                            var errorMessage = document.getElementById("error-message")
+
+                            errorContainer.classList.add("d-none")
+                            errorMessage.innerHTML = ""
+                            window.clearTimeout(timeout)
+
+                            errorContainer.classList.remove("d-none")
+                            console.log(data.errorMsg);
+                            errorMessage.append(data.errorMsg.errorInfo)
+
+                            timeout = window.setTimeout(() => {
+                                errorContainer.classList.add("d-none")
+                            }, 5500);
+                        })
+                    }
+
+
+
+
+                }).catch(error => {
+                    console.log(error);
                 })
+            /*.then(data => {
+                console.log(data)
+            })*/
         }
 
         async function getGuestCompanies() {
@@ -151,16 +182,10 @@
 
         function validateForm(data) {
 
+            var errorContainer = document.getElementById("error-container")
+            var errorMessage = document.getElementById("error-message")
+
             var constraints = {
-                from: {
-                    presence: {
-                        allowEmpty: false,
-                        message: "^Correo requerido."
-                    },
-                    email: {
-                        message: "^Formato de correo incorrecto."
-                    },
-                },
                 name: {
                     presence: {
                         allowEmpty: false,
@@ -171,6 +196,15 @@
                     presence: {
                         allowEmpty: false,
                         message: "^Apellido requerido.",
+                    },
+                },
+                from: {
+                    presence: {
+                        allowEmpty: false,
+                        message: "^Correo requerido."
+                    },
+                    email: {
+                        message: "^Formato de correo incorrecto."
                     },
                 },
                 phone: {
@@ -186,6 +220,9 @@
 
                 }
             }
+            errorContainer.classList.add("d-none")
+            errorMessage.innerHTML = ""
+            window.clearTimeout(timeout)
 
             var result = validate({
                 from: data.email,
@@ -194,26 +231,30 @@
                 phone: data.phone
             }, constraints)
 
-            const objectMap = (obj, fn) =>
-                Object.fromEntries(
-                    Object.entries(obj).map(
-                        ([k, v], i) => [k, fn(v, k, i)]
-                    )
-                )
-            var message
-            objectMap(result, errors => {
-                message = message + `${errors[0]} \n`
-            })
-
-            alert(message)
-            /*if (result) {
+            if (result) {
                 // enviar mensaje con cada uno de los errores
-                result.map((input, key) => {
-                    console.log(input + " " + key)
+                const objectMap = (obj, fn) =>
+                    Object.fromEntries(
+                        Object.entries(obj).map(
+                            ([k, v], i) => [k, fn(v, k, i)]
+                        )
+                    )
+
+                objectMap(result, errors => {
+                    var message = `${String(errors[0])} \n`
+
+                    errorContainer.classList.remove("d-none")
+                    errorMessage.append(message)
                 })
 
+                timeout = window.setTimeout(() => {
+                    errorContainer.classList.add("d-none")
+                }, 5500);
+
+
                 return false
-            }*/
+            }
+            return true
         }
     </script>
 

@@ -64,3 +64,12 @@ body {
 #mainMessage {
     min-height: 30vh;
 }
+
+.error-container {
+    position: fixed;
+    top: 85px;
+    right: 0;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    z-index: 100;
+}

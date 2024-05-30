@@ -1,8 +1,8 @@
 <header>
     <div id="header" class="header d-flex align-items-center fixed-top bg-dark" style="--bs-bg-opacity: .8;">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
-            <a class="logo d-flex align-items-center" href="{{ url('/') }}">
-                <img src="{{ asset('/assets/images/somus-logo-dark.png') }}" alt="Somus" width="100" height="80">
+            <a class="logo d-flex align-items-center my-3" href="{{ url('/') }}">
+                <img src="{{ asset('/assets/images/somus_logo-bco.png') }}" alt="Somus" width="100" height="43">
             </a>
             <nav class="navbar navbar-expand-lg bg-transparent mx-auto">
                 <div class="container">

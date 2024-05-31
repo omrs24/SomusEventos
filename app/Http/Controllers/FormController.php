@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SentFormConfirmation;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\Mail;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class FormController extends Controller
 {
@@ -44,7 +48,24 @@ class FormController extends Controller
             $form->phone = $data->phone;
             $form->guest_companies_id = $data->guest_companies_id;
 
-            $form->save();
+            $status = $form->save();
+
+            //If form data is saved then proceed to create qr code and save it to server
+            if ($status) {
+                $fileName = $form->email . ".svg";
+                $qrCode = QrCode::size(150)
+                    ->backgroundColor(255, 255, 255)
+                    //->color(0, 0, 255)
+                    ->margin(1)
+                    ->generate('https://minhazulmin.github.io/');
+                // /public/uploads/filename.svg
+                if (!Storage::disk('public_uploads')->put($fileName, $qrCode)) {
+                    return false;
+                }
+
+                Mail::to(["omar.rosales@som.us", "jose.orizaba@som.us", "eduardo.jimenez@som.us"])
+                    ->send(new SentFormConfirmation($fileName, $qrCode));
+            }
 
             return response()->json([
                 "data" => $form->id
@@ -52,6 +73,7 @@ class FormController extends Controller
         } catch (Exception $e) {
 
             if ((int)$e->getCode() == 23000) {
+                Debugbar::error($e->getMessage());
                 return response()->json([
                     "errorMsg" => [
                         "errorInfo" => "El correo ya se encuentra registrado."
@@ -64,7 +86,8 @@ class FormController extends Controller
 
             return response()->json([
                 "errorMsg" => [
-                    "errorInfo" => "Unexpected error. Contact system admin sistemas@som.us"
+                    //"errorInfo" => "Unexpected error. Contact system admin sistemas@som.us"
+                    "errorInfo" => $e->getMessage()
                 ]
             ], 500);
         }

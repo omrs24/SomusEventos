@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\GuestCompanyController;
+use App\Http\Controllers\QRcodeGenerateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,8 @@ Route::group(['prefix' => '/confirmacion'], function () {
     Route::get('/', function () {
         return view('confirmation.index');
     });
+
+    Route::get('/qrgenerate', [QRcodeGenerateController::class, 'qrcode']);
     //Route::get('/', [FormController::class, 'ConfirmacionIndex'])->name("ConfirmacionIndex");
     //obtener la info del recurso solicitado
     Route::get('/{resource}', [FormController::class, 'index']);

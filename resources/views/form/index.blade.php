@@ -70,12 +70,14 @@
                                         </div>
                                     </div>
                                     <div class="col-12 py-2">
-                                        <div class="form-floating">
-                                            <select id="ddlEmpresa" class="form-control" aria-label="Empresa">
+                                        <div class="border">
+                                            <label for="ddlEmpresa" class="form-label  fs-6 ps-2 pt-2 ms-1"><i class="bi bi-building"></i> Empresa</label>
+                                            <select id="ddlEmpresa" class="form-control w-100" aria-label="Empresa">
                                                 <option value="-1" disabled>Selecciona...</option>
                                             </select>
-                                            <label for="ddlEmpresa" class="form-label text-reset"><i class="bi bi-building"></i> Empresa</label>
+
                                         </div>
+
                                     </div>
 
                                 </div>
@@ -151,6 +153,13 @@
         }
 
         async function getGuestCompanies() {
+
+            var ddl = NiceSelect.bind(document.getElementById("ddlEmpresa"), {
+                searchable: true,
+                placeholder: "Selecciona...",
+            })
+            console.log(ddl)
+
             let fetchData = {
                 method: 'GET',
                 headers: new Headers({
@@ -168,10 +177,15 @@
                         option.value = company.id;
 
                         ddlEmpresas.appendChild(option)
-
+                        ddl.update()
                         //ddlEmpresas.appendChild(`<option value='${company.id}'> ${company.company_name} </option>`)
+                        document.getElementsByClassName("nice-select-dropdown")[0].classList.add("w-100")
                     })
                 })
+
+            //Para ajustar vista en views pequeñas
+            //ddl.dropdown.classList.add("w-100")
+            //Para ajustar vista en views pequeñas
 
         }
 

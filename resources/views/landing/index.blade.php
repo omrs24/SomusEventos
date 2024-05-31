@@ -11,13 +11,13 @@
     <main class="main">
         <section id="section" class="section primary-section">
             <div class="container">
-                <div class="row justify-content-between align-items-center">
+                <div class="d-flex flex-column justify-content-between align-items-center text-center">
                     <div class="col-md-5">
                         <div id="mainMessage" class="container d-flex align-items-center">
                             <div class="row">
                                 <h2 class="text-light fw-bold">Comida reaseguradores 2024</h2>
                                 <span>
-                                    <p class="fs-4 fw-bold orange-text-somus">
+                                    <p class="fs-4 fw-bold text-light">
                                         Te invitamos a asistir en la proxima Comida de Reaseguradores
                                     </p>
                                 </span>

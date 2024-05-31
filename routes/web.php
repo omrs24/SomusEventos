@@ -47,3 +47,19 @@ Route::group(['prefix' => '/empresas'], function () {
     Route::put('/{resource}', [GuestCompanyController::class, 'update']);
     Route::delete('/{resource}', [GuestCompanyController::class, 'delete']);
 });
+
+Route::group(['prefix' => '/confirmacion'], function () {
+    Route::get('/', function () {
+        return view('confirmation.index');
+    });
+    //Route::get('/', [FormController::class, 'ConfirmacionIndex'])->name("ConfirmacionIndex");
+    //obtener la info del recurso solicitado
+    Route::get('/{resource}', [FormController::class, 'index']);
+    //Debe retornar una vista
+    Route::get('/create', [FormController::class, 'create']);
+    Route::get('/{resource}/edit', [FormController::class, 'edit']);
+
+    Route::post('/', [FormController::class, 'store'])->name("saveData");
+    Route::put('/{resource}', [FormController::class, 'update']);
+    Route::delete('/{resource}', [FormController::class, 'delete']);
+});

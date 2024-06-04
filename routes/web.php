@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\GuestCompanyController;
 use App\Http\Controllers\QRcodeGenerateController;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,7 @@ use App\Http\Controllers\QRcodeGenerateController;
 Route::get('/', function () {
     return view('landing.index');
 });
+
 
 Route::group(['prefix' => '/registro'], function () {
 
@@ -54,9 +57,16 @@ Route::group(['prefix' => '/confirmacion'], function () {
         return view('confirmation.index');
     });
 
+    //temp routes
+    Route::get('/uuid', function () {
+        return (string) Str::uuid();
+    });
+    Route::get('/ConfirmationMailTemplate', function () {
+        return view("mail.sentformconfirmation");
+    });
     Route::get('/qrgenerate', [QRcodeGenerateController::class, 'qrcode']);
-    //Route::get('/', [FormController::class, 'ConfirmacionIndex'])->name("ConfirmacionIndex");
-    //obtener la info del recurso solicitado
+
+
     Route::get('/{resource}', [FormController::class, 'index']);
     //Debe retornar una vista
     Route::get('/create', [FormController::class, 'create']);

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
     use HasFactory;
+    use HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +22,8 @@ class Form extends Model
         'email',
         'phone',
         'guest_companies_id',
+        'sent_mail',
+        'answered_form',
     ];
 
 

@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('phone');
             $table->foreignId('guest_companies_id')->nullable(true);
             $table->integer('rol_id');
-            $table->integer('sent_mail');
-            $table->boolean('answered_form')->nullable(true);
             $table->string('password')->nullable(true);
             $table->rememberToken();
             $table->timestamps();

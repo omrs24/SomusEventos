@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Form;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,12 +17,14 @@ class SentFormConfirmation extends Mailable
 
     private $qrName;
     private $qr;
+    private $form;
     /**
      * Create a new message instance.
      */
-    public function __construct(string $qrName, string $qr)
+    public function __construct(Form $form, string $qrName, string $qr)
     {
         //
+        $this->form = $form;
         $this->qrName = $qrName;
         $this->qr = $qr;
     }
@@ -47,6 +50,7 @@ class SentFormConfirmation extends Mailable
         return $this->subject('My Test Email')
             ->view('mail.sentformconfirmation')
             ->with([
+                'form' => $this->form,
                 'fileName' => $this->qrName,
                 'qr' => $this->qr
             ]);

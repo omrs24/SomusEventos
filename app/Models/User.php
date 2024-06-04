@@ -24,8 +24,6 @@ class User extends Authenticatable
         'phone',
         'guest_companies_id',
         'rol_id',
-        'sent_mail',
-        'answered_form',
         'password',
     ];
 

@@ -57,14 +57,26 @@ class FormController extends Controller
                     ->backgroundColor(255, 255, 255)
                     //->color(0, 0, 255)
                     ->margin(1)
-                    ->generate('https://minhazulmin.github.io/');
+                    ->generate($form->id);
                 // /public/uploads/filename.svg
                 if (!Storage::disk('public_uploads')->put($fileName, $qrCode)) {
                     return false;
                 }
 
-                Mail::to(["omar.rosales@som.us", "jose.orizaba@som.us", "eduardo.jimenez@som.us"])
-                    ->send(new SentFormConfirmation($fileName, $qrCode));
+                /*Mail::to(["omar.rosales@som.us", "jose.orizaba@som.us", "eduardo.jimenez@som.us"])
+                    ->send(new SentFormConfirmation($fileName, $qrCode));*/
+                if (!(Mail::to("from@example.com")
+                    ->send(new SentFormConfirmation($form, $fileName, $qrCode)))) {
+                    return response()->json([
+                        "errorMsg" => [
+                            "errorInfo" => "Error al enviar el correo electronico."
+                        ]
+                    ], 500);
+                }
+
+                $form->sent_mail = (int) $form->sent_mail + 1;
+
+                $form->save();
             }
 
             return response()->json([

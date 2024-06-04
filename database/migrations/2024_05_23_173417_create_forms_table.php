@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('forms', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string("name");
             $table->string("last_name");
             $table->string("email")->unique();
             $table->string("phone")->nullable(true);
             $table->foreignId("guest_companies_id");
+            $table->integer('sent_mail')->nullable(true);
+            $table->boolean('answered_form')->nullable(true);
             $table->timestamps();
         });
     }

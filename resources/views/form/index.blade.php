@@ -84,7 +84,7 @@
 
                                 <div class="row">
                                     <div class="d-grid gap-2 col-sm-4 ms-auto orange-text-somus me-4">
-                                        <button type="button" class="btn orange-bg-somus" onclick="sendForm();">¡Registrarse!</button>
+                                        <button type="button" class="btn orange-bg-somus fw-bold" style="--bs-btn-color: #fff; !important" onclick="sendForm();">¡Registrarse!</button>
                                     </div>
                                 </div>
                             </div>
